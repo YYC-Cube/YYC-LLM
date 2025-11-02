@@ -4,7 +4,7 @@
 
 <div align="center">
 
-# YanYu Cloud³ · Nexus Expansion
+# YanYu Cloud³ · LLM
 
 ### 「万象归元于云枢 丨 深栈智启新纪元」  
 *All Realms Converge at Cloud Nexus, DeepStack Ignites a New Era*
