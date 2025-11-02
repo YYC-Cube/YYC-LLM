@@ -1,9 +1,22 @@
-<!-- 顶图 -->
 <p align="center">
-  <img src="public/Git-Nexus-Expansion.png" alt="YanYu Cloud³ · Nexus Expansion" width="100%" />
+  <img src="public/version-header.png" alt="YYC³ Intelligence Core" width="100%">
 </p>
 
+<div align="center">
+
 # YanYu Cloud³ · Nexus Expansion
+
+### 「万象归元于云枢 丨 深栈智启新纪元」  
+*All Realms Converge at Cloud Nexus, DeepStack Ignites a New Era*
+
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.2-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18.2-61dafb?logo=react)](https://reactjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-14.0-black?logo=next.js)](https://nextjs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-22-green?logo=node.js)](https://nodejs.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
+[![Release](https://img.shields.io/badge/Release-v1.0.0-orange)](https://github.com/yyc3/intelligence-core/releases)
+[![Documentation](https://img.shields.io/badge/Docs-Online-brightgreen)](https://docs.yyc3.ai)
+
 
 面向深度智能应用的 Next.js 14+ 项目模板，专注于强健的构建流程、可观测性与端到端（E2E）质量保障。当前版本聚焦模型引擎演示、交互式 UI 组件集成与基础 CI/CD 工作流。
 
