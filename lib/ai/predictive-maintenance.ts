@@ -3,7 +3,7 @@
  * 提供系统健康监控、异常检测、趋势预测等功能
  */
 
-import { EventEmitter } from "events"
+
 
 // 指标定义接口
 export interface MetricDefinition {
@@ -84,17 +84,48 @@ export interface HealthScore {
 /**
  * 预测性维护服务类
  */
-export class PredictiveMaintenanceService extends EventEmitter {
+export class PredictiveMaintenanceService {
   private static instance: PredictiveMaintenanceService
   private metrics: Map<string, MetricDefinition> = new Map()
   private dataPoints: Map<string, MetricDataPoint[]> = new Map()
   private anomalies: Map<string, Anomaly[]> = new Map()
   private isMonitoring = false
   private monitoringIntervals: Map<string, NodeJS.Timeout> = new Map()
+  private eventListeners = new Map<string, Set<(payload?: any) => void>>()
 
   private constructor() {
-    super()
     this.initializeDefaultMetrics()
+  }
+
+  public on(event: string, listener: (payload?: any) => void): void {
+    const set = this.eventListeners.get(event) || new Set()
+    set.add(listener)
+    this.eventListeners.set(event, set)
+  }
+
+  public off(event: string, listener: (payload?: any) => void): void {
+    const set = this.eventListeners.get(event)
+    if (set) {
+      set.delete(listener)
+      if (set.size === 0) this.eventListeners.delete(event)
+    }
+  }
+
+  public removeListener(event: string, listener: (payload?: any) => void): void {
+    this.off(event, listener)
+  }
+
+  private emit(event: string, payload?: any): void {
+    const set = this.eventListeners.get(event)
+    if (set) {
+      for (const fn of Array.from(set)) {
+        try {
+          fn(payload)
+        } catch (e) {
+          console.error(`事件监听器执行失败: ${event}`, e)
+        }
+      }
+    }
   }
 
   /**

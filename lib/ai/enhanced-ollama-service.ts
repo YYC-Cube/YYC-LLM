@@ -1,9 +1,7 @@
 "use client"
 
-import { EventEmitter } from "events"
-
 // 增强版Ollama服务 - 优化性能和稳定性
-export class EnhancedOllamaService extends EventEmitter {
+export class EnhancedOllamaService {
   private static instance: EnhancedOllamaService
   private baseUrl: string
   private models = new Map<string, EnhancedOllamaModel>()
@@ -14,11 +12,50 @@ export class EnhancedOllamaService extends EventEmitter {
   private reconnectAttempts = 0
   private maxReconnectAttempts = 5
   private connectionStatus: "connected" | "disconnected" | "reconnecting" = "disconnected"
+  private listeners = new Map<string, Set<(payload?: any) => void>>()
 
   private constructor() {
-    super()
     this.baseUrl = process.env.NEXT_PUBLIC_OLLAMA_URL || "http://localhost:11434"
     this.initializeService()
+  }
+
+  public on(event: string, listener: (payload?: any) => void): void {
+    const set = this.listeners.get(event) || new Set()
+    set.add(listener)
+    this.listeners.set(event, set)
+  }
+
+  public once(event: string, listener: (payload?: any) => void): void {
+    const wrapper = (payload?: any) => {
+      this.off(event, wrapper)
+      listener(payload)
+    }
+    this.on(event, wrapper)
+  }
+
+  public off(event: string, listener: (payload?: any) => void): void {
+    const set = this.listeners.get(event)
+    if (set) {
+      set.delete(listener)
+      if (set.size === 0) this.listeners.delete(event)
+    }
+  }
+
+  public removeListener(event: string, listener: (payload?: any) => void): void {
+    this.off(event, listener)
+  }
+
+  public emit(event: string, payload?: any): void {
+    const set = this.listeners.get(event)
+    if (set) {
+      for (const fn of Array.from(set)) {
+        try {
+          fn(payload)
+        } catch (e) {
+          console.error(`事件监听器执行失败: ${event}`, e)
+        }
+      }
+    }
   }
 
   public static getInstance(): EnhancedOllamaService {

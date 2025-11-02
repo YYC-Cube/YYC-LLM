@@ -1,0 +1,72 @@
+# Dependabot 配置文件
+# 用于自动检查和更新项目依赖
+
+version: 2
+updates:
+  # 自动更新 npm 依赖
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      # 每周一早上更新
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Shanghai"
+    # 自动批准符合语义化版本规则的更新
+    versioning-strategy: "widen"
+    # 忽略特定依赖的更新
+    ignore:
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "next"
+        update-types: ["version-update:semver-major"]
+    # 配置更新 PR 的标签
+    labels:
+      - "dependencies"
+      - "automerge"
+    # 自动生成兼容性测试
+    compat-labels:
+      - "needs-tests"
+    # 分组更新相关依赖
+    groups:
+      # 分组 React 相关依赖更新
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+      # 分组 Next.js 相关依赖更新
+      next:
+        patterns:
+          - "next"
+          - "@next/eslint-plugin-next"
+      # 分组测试工具更新
+      testing:
+        patterns:
+          - "jest"
+          - "@testing-library/*"
+          - "playwright"
+    # 允许 Dependabot 自动合并测试通过的 PR
+    automerge:
+      enabled: true
+      # 仅在 CI 测试通过后自动合并
+      require-status-checks: true
+      # 要求特定的 CI 检查通过
+      required-status-checks:
+        contexts:
+          - "test"
+          - "lint"
+          - "type-check"
+  
+  # 自动更新 GitHub Actions 工作流
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Shanghai"
+    labels:
+      - "github-actions"
+      - "automerge"

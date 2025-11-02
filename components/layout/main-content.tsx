@@ -9,6 +9,7 @@ import AutomationProduction from "@/components/modules/automation-production"
 import FileReview from "@/components/modules/file-review"
 import ScoreAnalysis from "@/components/modules/score-analysis"
 import DeploymentManagement from "@/components/modules/deployment-management"
+import LocalModelEngine from "@/components/modules/local-model-engine"
 
 interface MainContentProps {
   activeModule: ModuleType
@@ -32,6 +33,8 @@ export default function MainContent({ activeModule }: MainContentProps) {
         return <ScoreAnalysis />
       case "deployment-management":
         return <DeploymentManagement />
+      case "local-model-engine":
+        return <LocalModelEngine />
       default:
         return <DefaultModuleView activeModule={activeModule} />
     }

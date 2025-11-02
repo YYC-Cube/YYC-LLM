@@ -1,0 +1,96 @@
+{
+  "name": "YYC³-LLM 项目模板",
+  "description": "言語云³深度堆栈全栈智创引擎项目模板配置",
+  "homepage": "https://github.com/yourusername/YYC³-LLM",
+  "topics": ["nextjs", "typescript", "react", "llm", "ai", "tailwindcss"],
+  "template": {
+    "owner": "yourusername",
+    "repo": "YYC³-LLM",
+    "reference": "main"
+  },
+  "features": {
+    "issues": true,
+    "projects": true,
+    "wiki": true,
+    "pages": false,
+    "downloads": true,
+    "security": true,
+    "actions": {
+      "enabled": true,
+      "workflows": ["ci.yml"]
+    }
+  },
+  "labels": [
+    {
+      "name": "bug",
+      "color": "d73a49",
+      "description": "出现的错误或问题"
+    },
+    {
+      "name": "enhancement",
+      "color": "a2eeef",
+      "description": "新功能或功能改进"
+    },
+    {
+      "name": "documentation",
+      "color": "0075ca",
+      "description": "文档相关的更改"
+    },
+    {
+      "name": "dependencies",
+      "color": "0366d6",
+      "description": "依赖更新"
+    },
+    {
+      "name": "security",
+      "color": "e11d21",
+      "description": "安全相关问题"
+    },
+    {
+      "name": "good first issue",
+      "color": "7057ff",
+      "description": "适合新手的问题"
+    },
+    {
+      "name": "help wanted",
+      "color": "008672",
+      "description": "需要帮助的问题"
+    },
+    {
+      "name": "question",
+      "color": "d876e3",
+      "description": "需要澄清或解答的问题"
+    },
+    {
+      "name": "wontfix",
+      "color": "000000",
+      "description": "不会修复的问题"
+    },
+    {
+      "name": "automerge",
+      "color": "00563f",
+      "description": "可以自动合并的PR"
+    }
+  ],
+  "default_branch": "main",
+  "protected_branches": [
+    {
+      "name": "main",
+      "required_status_checks": ["test", "lint", "type-check"],
+      "enforce_admins": true,
+      "required_pull_request_reviews": 1
+    },
+    {
+      "name": "develop",
+      "required_status_checks": ["test", "lint"],
+      "enforce_admins": true,
+      "required_pull_request_reviews": 1
+    }
+  ],
+  "collaborators": [
+    {
+      "username": "yourusername",
+      "permission": "admin"
+    }
+  ]
+}

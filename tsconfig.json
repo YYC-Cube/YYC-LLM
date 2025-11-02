@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "target": "ES6",
     "skipLibCheck": true,
@@ -13,15 +17,30 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "forceConsistentCasingInFileNames": true,
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "paths": {
-      "@/*": ["./*"]
-    }
+    // 注意：为排查构建问题，临时移除路径别名映射
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@/*": [
+    //     "./*"
+    //   ]
+    // }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "types/**/*.ts" // 确保类型文件被包含（如果types是根目录下的文件夹）
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build" // 补充常见构建目录排除
+  ]
 }
